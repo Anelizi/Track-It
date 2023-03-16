@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Topo from "../../components/Topo";
 import { BsPlusSquareFill } from "react-icons/bs";
 import Menu from "../../components/Menu";
+import AddHabitos from "./AddHabitos";
+
 
 export default function Habitos() {
   return (
@@ -13,6 +15,9 @@ export default function Habitos() {
             <h2>Meus hábitos</h2>
             <Icon />
           </HabitoContainer>
+
+          <AddHabitos/>
+
           <p>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
             começar a trackear!
@@ -55,7 +60,7 @@ const Main = styled.div`
   }
 `;
 const HabitoContainer = styled.div`
-  width: calc(100% - 45px);
+  width: calc(100% - 40px);
   height: 30px;
   display: flex;
   justify-content: space-between;

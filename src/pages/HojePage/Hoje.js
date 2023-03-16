@@ -1,25 +1,30 @@
 import styled from "styled-components";
 import Menu from "../../components/Menu";
 import Topo from "../../components/Topo";
+import { BsCheckSquareFill } from "react-icons/bs";
 
-export default function Hoje(){
-    return(
-        <PageContainer>
-            <Topo/>
-            <Style>
-                <Main>
-                    <h2>Segunda, 17/05</h2>
-                    <h3>Nenhum hábito concluído ainda</h3>
-                    <div>
-                        <h4></h4>
-                        <p></p>
-                        <p></p>
-                    </div>
-                </Main>
-            </Style>
-            <Menu/>
-        </PageContainer>
-    )
+export default function Hoje() {
+  return (
+    <PageContainer>
+      <Topo />
+      <Style>
+        <Main>
+          <h2>Segunda, 17/05</h2>
+          <h3>Nenhum hábito concluído ainda</h3>
+
+          <Tarefas>
+            <div>
+              <h4>Ler 1 capítulo de livro</h4>
+              <p>Sequência atual: 3 dias </p>
+              <p>Seu recorde: 5 dias</p>
+            </div>
+            <Icon />
+          </Tarefas>
+        </Main>
+      </Style>
+      <Menu />
+    </PageContainer>
+  );
 }
 const PageContainer = styled.div`
   width: 100vw;
@@ -50,7 +55,36 @@ const Main = styled.div`
     font-size: 23px;
   }
   h3 {
-    color: #BABABA;
+    color: #bababa;
     font-size: 18px;
+    margin-top: 10px;
   }
-`
+`;
+const Tarefas = styled.div`
+  width: 100% ;
+  height: 94px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    width: 100% ;
+    margin-left: 10px;
+    color: #666666;
+    h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
+`;
+const Icon = styled(BsCheckSquareFill)`
+  font-size: 80px;
+  margin-right: 10px;
+  color: #ebebeb;
+  cursor: pointer;
+`;
