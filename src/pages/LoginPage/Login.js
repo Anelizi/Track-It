@@ -58,27 +58,8 @@ const FromContainer = styled.form`
   button {
     width: calc(100% - 40px);
     background: #52b6ff;
-    border: 1px solid #d4d4d4;
     color: #ffffff;
-    border-radius: 5px;
     height: 45px;
     font-size: 20px;
-    cursor: pointer;
-  }
-  input {
-    width: calc(100% - 60px);
-    background: #ffffff;
-    border: 1px solid #d4d4d4;
-    border-radius: 5px;
-    height: 45px;
-    margin-bottom: 5px;
-    padding: 0 10px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    &::placeholder {
-      color: #dbdbdb;
-      font-weight: 400;
-    }
   }
 `;

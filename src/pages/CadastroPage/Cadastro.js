@@ -69,20 +69,4 @@ const FromContainer = styled.form`
     font-size: 20px;
     cursor: pointer;
   }
-  input {
-    width: calc(100% - 60px);
-    background: #ffffff;
-    border: 1px solid #d4d4d4;
-    border-radius: 5px;
-    height: 45px;
-    margin-bottom: 5px;
-    padding: 0 10px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    &::placeholder {
-      color: #dbdbdb;
-      font-weight: 400;
-    }
-  }
 `;

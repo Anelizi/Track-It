@@ -1,26 +1,31 @@
 import styled from "styled-components";
 import Topo from "../../components/Topo";
+import { BsPlusSquareFill } from "react-icons/bs";
+import Menu from "../../components/Menu";
 
 export default function Habitos() {
   return (
     <PageContainer>
       <Topo />
       <Style>
-        <>
-          <h2>Meus hábitos</h2>
-          <div>+</div>
-        </>
-        <p>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </p>
+        <Main>
+          <HabitoContainer>
+            <h2>Meus hábitos</h2>
+            <Icon />
+          </HabitoContainer>
+          <p>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </p>
+        </Main>
       </Style>
+      <Menu/>
     </PageContainer>
   );
 }
 const PageContainer = styled.div`
   width: 100vw;
-  height: 79vh;
+  height: 79.5vh;
   margin-top: 70px;
   margin-bottom: 70px;
   display: flex;
@@ -28,16 +33,7 @@ const PageContainer = styled.div`
   align-items: center;
   font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
-  background-color: #E5E5E5;
-  img {
-    width: 180px;
-    height: 178px;
-  }
-  a {
-    color: #52b6ff;
-    font-size: 14px;
-    text-align: center;
-  }
+  background-color: #e5e5e5;
 `;
 const Style = styled.div`
   display: flex;
@@ -45,4 +41,33 @@ const Style = styled.div`
   align-items: center;
   width: 500px;
   height: 78vh;
+`;
+const Main = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  p {
+    width: calc(100% - 40px);
+    color: #666666;
+    font-size: 18px;
+  }
+`;
+const HabitoContainer = styled.div`
+  width: calc(100% - 45px);
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  h2 {
+    color: #126ba5;
+    font-size: 23px;
+  }
+`;
+const Icon = styled(BsPlusSquareFill)`
+  color: #52b6ff;
+  font-size: 30px;
+  cursor: pointer;
 `;
