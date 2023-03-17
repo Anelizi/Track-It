@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import styled from "styled-components";
-import image from "../assets/perfil.jpg"
+import { ImageContext } from "../context/ImageContext";
 
 export default function Topo() {
+  const {image} = useContext(ImageContext);
   return (
     <TopoContainer data-test="header">
       <h1>TrackIt</h1>

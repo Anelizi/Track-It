@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo.png";
 import { BASE_URL } from "../../constants/urls";
+import { ImageContext } from "../../context/ImageContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ export default function Login() {
     classNameLoading: "",
   });
   const navigate = useNavigate();
+  const { setImage, setToken } = useContext(ImageContext);
 
   function login(e) {
     e.preventDefault();
@@ -24,11 +26,20 @@ export default function Login() {
 
     axios
       .post(`${BASE_URL}auth/login`, body)
-      .then((res) => navigate("/hoje"))
+      .then((res) => {
+        navigate("/hoje");
+        console.log(res.data);
+        localStorage.setItem("tokenLocal", res.data.token);
+        setToken(localStorage.getItem("token"));
+        localStorage.setItem("image", res.data.image);
+        setImage(localStorage.getItem("image"));
+      })
       .catch((err) => {
         alert(err.response.data.message);
         setLoading({ ...loading, loading: false, classNameLoading: "" });
       });
+
+      
   }
 
   return (
