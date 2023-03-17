@@ -8,17 +8,39 @@ export default function Cadastro() {
       <Style>
         <img src={logo} />
         <FromContainer>
-          <label htmlFor="email"/>
-          <input id="email" type="email" placeholder="email" />
-          <label htmlFor="password"/>
-          <input id="password" type="password" placeholder="senha" />
-          <label htmlFor="name"/>
-          <input id="name" type="text" placeholder="nome" />
-          <label htmlFor="foto"/>
-          <input id="foto" type="url" placeholder="foto" />
-          <button type="submid">Cadastrar</button>
+          <label htmlFor="email" />
+          <input
+            id="email"
+            type="email"
+            placeholder="email"
+            data-test="email-input"
+          />
+          <label htmlFor="password" />
+          <input
+            id="password"
+            type="password"
+            placeholder="senha"
+            data-test="password-input"
+          />
+          <label htmlFor="name" />
+          <input
+            id="name"
+            type="text"
+            placeholder="nome"
+            data-test="user-name-input"
+          />
+          <label htmlFor="foto" />
+          <input
+            id="foto"
+            type="url"
+            placeholder="foto"
+            data-test="user-image-input"
+          />
+          <button type="submid" data-test="signup-btn">
+            Cadastrar
+          </button>
         </FromContainer>
-        <Link to="/">
+        <Link to="/" data-test="login-link">
           <p>Já tem uma conta? Faça login!</p>
         </Link>
       </Style>

@@ -3,7 +3,7 @@ import image from "../assets/perfil.jpg"
 
 export default function Topo() {
   return (
-    <TopoContainer>
+    <TopoContainer data-test="header">
       <h1>TrackIt</h1>
       <img src={image}/>
     </TopoContainer>
