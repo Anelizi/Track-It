@@ -78,7 +78,7 @@ export default function Cadastro() {
             required
             data-test="user-image-input"
           />
-          <button type="submid" data-test="signup-btn">
+          <button disabled={loading.loading} type="submid" data-test="signup-btn">
             {loading.loading ? (
               <ThreeDots
                 color="rgba(255, 255, 255, 1)"
