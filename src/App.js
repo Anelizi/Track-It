@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, BrowserRouter , Routes } from "react-router-dom";
 import Cadastro from "./pages/CadastroPage/Cadastro";
 import Habitos from "./pages/HabitosPage/Habitos";
@@ -11,9 +12,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/cadastro" element={<Cadastro/>}/>
-        {/* <Route path="/habitos" element={<Habitos/>}/> */}
-        {/* <Route path="/hoje" element={<Hoje/>}/> */}
-        {/* <Route path="/historico" element={<Historico/>}/> */}
+        <Route path="/habitos" element={<Habitos/>}/>
+        <Route path="/hoje" element={<Hoje/>}/>
+        <Route path="/historico" element={<Historico/>}/>
       </Routes>
     </BrowserRouter>
   );

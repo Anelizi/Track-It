@@ -2,15 +2,15 @@ import styled from "styled-components"
 
 export default function AddHabitos(){
     return(
-        <ContainerHabito>
-            <input type="text" placeholder="nome do hábito"/>
+        <ContainerHabito data-test="habit-create-container">
+            <input type="text" placeholder="nome do hábito" data-test="habit-name-input"/>
             <Semana>
               <button>D</button>
               <button>S</button>
             </Semana>
             <ButtonContainer>
-              <button>Cancelar</button>
-              <button>Salvar</button>
+              <button data-test="habit-create-cancel-btn">Cancelar</button>
+              <button data-test="habit-create-save-btn">Salvar</button>
             </ButtonContainer>
           </ContainerHabito>
     )

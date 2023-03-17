@@ -9,16 +9,16 @@ export default function Hoje() {
       <Topo />
       <Style>
         <Main>
-          <h2>Segunda, 17/05</h2>
-          <h3>Nenhum hábito concluído ainda</h3>
+          <h2 data-test="today">Segunda, 17/05</h2>
+          <h3 data-test="today-counter">Nenhum hábito concluído ainda</h3>
 
-          <Tarefas>
+          <Tarefas data-test="today-habit-container">
             <div>
-              <h4>Ler 1 capítulo de livro</h4>
-              <p>Sequência atual: 3 dias </p>
-              <p>Seu recorde: 5 dias</p>
+              <h4 data-test="today-habit-name">Ler 1 capítulo de livro</h4>
+              <p data-test="today-habit-sequence">Sequência atual: 3 dias </p>
+              <p data-test="today-habit-record">Seu recorde: 5 dias</p>
             </div>
-            <Icon />
+            <Icon data-test="today-habit-check-btn"/>
           </Tarefas>
         </Main>
       </Style>

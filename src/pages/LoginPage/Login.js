@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -7,24 +7,30 @@ import logo from "../../assets/logo.png";
 import { BASE_URL } from "../../constants/urls";
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState({loading: false, classNameLoading: ""})
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState({
+    loading: false,
+    classNameLoading: "",
+  });
+  const navigate = useNavigate();
 
-  function login(e){
-    e.preventDefault()
+  function login(e) {
+    e.preventDefault();
 
-    setLoading({...loading, loading:true, classNameLoading: "disabledInpu"})
+    setLoading({ ...loading, loading: true, classNameLoading: "disabledInpu" });
 
-    const body = {email, password}
+    const body = { email, password };
 
-    axios.post(`${BASE_URL}auth/login`, body)
-        .then(res => navigate("/hoje"))
-        .catch(err => {alert(err.response.data.message) 
-          setLoading({...loading, loading: false, classNameLoading: ""}) })
+    axios
+      .post(`${BASE_URL}auth/login`, body)
+      .then((res) => navigate("/hoje"))
+      .catch((err) => {
+        alert(err.response.data.message);
+        setLoading({ ...loading, loading: false, classNameLoading: "" });
+      });
   }
-  
+
   return (
     <PageContainer>
       <Style>
@@ -34,7 +40,7 @@ export default function Login() {
             type="email"
             placeholder="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className={loading.classNameLoading}
             disabled={loading.loading}
             required
@@ -44,14 +50,27 @@ export default function Login() {
             type="password"
             placeholder="senha"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             className={loading.classNameLoading}
             disabled={loading.loading}
             required
             data-test="password-input"
           />
-          <button disabled={loading.loading} type="submid" data-test="login-btn">
-            {loading.loading === false ? "Entrar" : <ThreeDots color="rgba(255, 255, 255, 1)" text-align="center" height={13} width={51} />}
+          <button
+            disabled={loading.loading}
+            type="submid"
+            data-test="login-btn"
+          >
+            {loading.loading ? (
+              <ThreeDots
+                color="rgba(255, 255, 255, 1)"
+                text-align="center"
+                height={13}
+                width={51}
+              />
+            ) : (
+              "Entrar"
+            )}
           </button>
         </FromContainer>
         <Link to="/cadastro" data-test="signup-link">
@@ -104,9 +123,9 @@ const FromContainer = styled.form`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   .disabledInpu {
-        background-color: rgba(212, 212, 212, 1);
-        color: rgba(175, 175, 175, 1)
-    }
+    background-color: #f2f2f2;
+  }
 `;
