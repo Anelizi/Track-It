@@ -1,25 +1,96 @@
+import axios from "axios";
+import dayjs from "dayjs";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Menu from "../../components/Menu";
 import Topo from "../../components/Topo";
-import { BsCheckSquareFill } from "react-icons/bs";
+import { BASE_URL } from "../../constants/urls";
+import { ConstantContext } from "../../context/ConstantContext";
+import Tarefas from "./Tarefas";
 
 export default function Hoje() {
+  const { token, completHabit, setCompletHabit } = useContext(ConstantContext);
+  const [habitToday, setHabitToday] = useState();
+
+  function listHabit() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .get(`${BASE_URL}habits/today`, config)
+      .then((res) => {
+        setHabitToday(res.data);
+        setCompletHabit(
+          (res.data.filter((habit) => habit.done).length / res.data.length) *
+            100
+        );
+      })
+      .catch((err) => console.log(err.response.data.message));
+  }
+  function checkHabit(id) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .post(`${BASE_URL}habits/${id}/check`, config)
+      .then(listHabit)
+      .catch((err) => console.log(err.response));
+  }
+
+  function noCheckHabit(id) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .post(`${BASE_URL}habits/${id}/uncheck`, config)
+      .then(listHabit)
+      .catch((err) => console.log(err.response));
+  }
+
+  function toChange(id) {
+    habitToday.find((habit) => habit.id === id).done
+      ? noCheckHabit(id)
+      : checkHabit(id);
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("tokenLocal")) {
+      listHabit();
+    }
+  }, []);
+
   return (
     <PageContainer>
       <Topo />
       <Style>
         <Main>
-          <h2 data-test="today">Segunda, 17/05</h2>
-          <h3 data-test="today-counter">Nenhum hábito concluído ainda</h3>
-
-          <Tarefas data-test="today-habit-container">
-            <div>
-              <h4 data-test="today-habit-name">Ler 1 capítulo de livro</h4>
-              <p data-test="today-habit-sequence">Sequência atual: 3 dias </p>
-              <p data-test="today-habit-record">Seu recorde: 5 dias</p>
-            </div>
-            <Icon data-test="today-habit-check-btn"/>
-          </Tarefas>
+          <h2 data-test="today">{dayjs().locale('pt-br').format('dddd, DD/MM')}</h2>
+          {habitToday ? (
+            completHabit > 0 ? (
+              <h3 id="counter" data-test="today-counter">{completHabit.toFixed()}% dos hábitos concluídos</h3>
+            ) : (
+              <h3 data-test="today-counter">Nenhum hábito concluído ainda</h3>
+            )
+          ) : (
+            <></>
+          )}
+          <>
+              {habitToday ? habitToday.map((h) =>
+                 <Tarefas key={h.id} habit={h} clickHabit={() => toChange(h.id)}/>
+              ) : 
+              <h3>Nenhum habitos para hoje</h3>
+              }
+          </>
+          
         </Main>
       </Style>
       <Menu />
@@ -59,32 +130,7 @@ const Main = styled.div`
     font-size: 18px;
     margin-top: 10px;
   }
-`;
-const Tarefas = styled.div`
-  width: 100% ;
-  height: 94px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  div {
-    width: 100% ;
-    margin-left: 10px;
-    color: #666666;
-    h4 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 13px;
-    }
+  #counter{
+    color: #8FC549;
   }
-`;
-const Icon = styled(BsCheckSquareFill)`
-  font-size: 80px;
-  margin-right: 10px;
-  color: #ebebeb;
-  cursor: pointer;
 `;

@@ -10,10 +10,11 @@ import { ConstantContext } from "./context/ConstantContext";
 export default function App() {
   const [image, setImage] = useState(localStorage.getItem("image"));
   const [token, setToken] = useState(localStorage.getItem("tokenLocal"));
+  const [completHabit, setCompletHabit] = useState(0);
 
   return (
     <BrowserRouter>
-      <ConstantContext.Provider value={{image, setImage, token, setToken}}>
+      <ConstantContext.Provider value={{image, setImage, token, setToken, completHabit, setCompletHabit}}>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />

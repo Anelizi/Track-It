@@ -33,7 +33,7 @@ export default function NovoHabito({
   }
 
   return (
-    <>
+    <Container data-test="habit-container">
       {habitList.reverse().map((h) => (
         <ContainerNovoHabito key={h.id} data-test="habit-container">
           <div>
@@ -53,9 +53,18 @@ export default function NovoHabito({
           <Icon onClick={() => delet(h.id)} data-test="habit-delete-btn"/>
         </ContainerNovoHabito>
       ))}
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ justify-items: center;
+ align-items: center;
+`
 
 const ContainerNovoHabito = styled.div`
   width: calc(100% - 40px);

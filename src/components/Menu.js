@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useContext } from "react";
+import { ConstantContext } from "../context/ConstantContext";
 
 export default function Menu() {
+
+  const { completHabit } = useContext(ConstantContext)
+
   return (
     <MenuContainer data-test="menu">
       <Style>
@@ -13,7 +18,7 @@ export default function Menu() {
         <Link to="/hoje" data-test="today-link">
           <button>
             <CircularProgressbar
-              value={""}
+              value={completHabit}
               text={"Hoje"}
               background
               backgroundPadding={6}

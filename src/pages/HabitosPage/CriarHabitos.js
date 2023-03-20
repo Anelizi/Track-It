@@ -26,7 +26,8 @@ export default function CriarHabitos({
     }
   }
 
-  function create() {
+  function create(e) {
+    e.preventDefault();
     const habit = {
       name: nameHabit,
       days: daysHabit,
@@ -52,15 +53,13 @@ export default function CriarHabitos({
         setHabitList(newList);
         setNameHabit("");
         setDaysHabit([]);
-        
+        setHabits(true);
       })
       .catch((err) => {
         alert(err.response.data.message);
-      });
-    setHabits(true)
+      });   
   }
   
-
   return createHabit === true ? (
     <ContainerHabito onSubmit={create} data-test="habit-create-container">
       <input
