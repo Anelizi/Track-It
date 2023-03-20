@@ -58,9 +58,9 @@ export default function CriarHabitos({
       .catch((err) => {
         alert(err.response.data.message);
       });
-      
+    setHabits(true)
   }
-  setHabits(true)
+  
 
   return createHabit === true ? (
     <ContainerHabito onSubmit={create} data-test="habit-create-container">
