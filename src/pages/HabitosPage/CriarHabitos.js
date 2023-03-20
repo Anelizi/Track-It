@@ -26,8 +26,7 @@ export default function CriarHabitos({
     }
   }
 
-  function create(e) {
-    e.preventDefault();
+  function create() {
     const habit = {
       name: nameHabit,
       days: daysHabit,
