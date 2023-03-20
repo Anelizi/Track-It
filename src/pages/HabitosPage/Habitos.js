@@ -1,11 +1,44 @@
 import styled from "styled-components";
 import Topo from "../../components/Topo";
-import { BsPlusSquareFill } from "react-icons/bs";
 import Menu from "../../components/Menu";
-import AddHabitos from "./AddHabitos";
-
+import { BsPlusSquareFill } from "react-icons/bs";
+import { useContext, useEffect, useState } from "react";
+import { ConstantContext } from "../../context/ConstantContext";
+import { BASE_URL } from "../../constants/urls";
+import axios from "axios";
+import CriarHabitos from "./CriarHabitos";
+import NovosHabitos from "./NovosHabitos";
 
 export default function Habitos() {
+  const [createHabit, setCreateHabit] = useState(false);
+  const { token } = useContext(ConstantContext);
+  const [habitList, setHabitList] = useState([]);
+  const [habits, setHabits] = useState(false);
+  const daysWeek = [
+    { day: "D", id: 0 },
+    { day: "S", id: 1 },
+    { day: "T", id: 2 },
+    { day: "Q", id: 3 },
+    { day: "Q", id: 4 },
+    { day: "S", id: 5 },
+    { day: "S", id: 6 },
+  ];
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .get(`${BASE_URL}habits`, config)
+      .then((res) => {
+        setHabitList(res.data.reverse());
+      })
+      .catch((err) => console.log(err.response.data.message));
+  }, []);
+
   return (
     <PageContainer>
       <Topo />
@@ -13,18 +46,35 @@ export default function Habitos() {
         <Main>
           <HabitoContainer>
             <h2>Meus hábitos</h2>
-            <Icon data-test="habit-create-btn"/>
+            <Icon
+              onClick={() => setCreateHabit(!createHabit)}
+              data-test="habit-create-btn"
+            />
           </HabitoContainer>
-
-          <AddHabitos/>
-
-          <p>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-            começar a trackear!
-          </p>
+          <CriarHabitos
+            createHabit={createHabit}
+            setCreateHabit={setCreateHabit}
+            habitList={habitList}
+            setHabitList={setHabitList}
+            daysWeek={daysWeek}
+            setHabits={setHabits}
+          />
+          {habits ? (
+            <NovosHabitos
+              habitList={habitList}
+              setHabitList={setHabitList}
+              daysWeek={daysWeek}
+              habits={habits}
+            />
+          ) : (
+            <p>
+              Você não tem nenhum hábito cadastrado ainda. Adicione um hábito
+              para começar a trackear!
+            </p>
+          )}
         </Main>
       </Style>
-      <Menu/>
+      <Menu />
     </PageContainer>
   );
 }

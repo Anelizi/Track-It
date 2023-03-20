@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo.png";
 import { BASE_URL } from "../../constants/urls";
-import { ImageContext } from "../../context/ImageContext";
+import { ConstantContext } from "../../context/ConstantContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ export default function Login() {
     classNameLoading: "",
   });
   const navigate = useNavigate();
-  const { setImage, setToken } = useContext(ImageContext);
+  const { setImage, setToken } = useContext(ConstantContext);
 
   function login(e) {
     e.preventDefault();
@@ -38,8 +38,6 @@ export default function Login() {
         alert(err.response.data.message);
         setLoading({ ...loading, loading: false, classNameLoading: "" });
       });
-
-      
   }
 
   return (
