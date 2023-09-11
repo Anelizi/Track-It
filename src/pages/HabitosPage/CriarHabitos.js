@@ -3,13 +3,13 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { BASE_URL } from "../../constants/urls";
 import { ConstantContext } from "../../context/ConstantContext";
+import weekDays from "../../constants/weekDays";
 
 export default function CriarHabitos({
   createHabit,
   setCreateHabit,
   habitList,
   setHabitList,
-  daysWeek,
   setHabits,
 }) {
   const { token } = useContext(ConstantContext);
@@ -70,7 +70,7 @@ export default function CriarHabitos({
         data-test="habit-name-input"
       />
       <Week>
-        {daysWeek.map((d) => (
+        {weekDays.map((d) => (
           <button
             key={d.id}
             disabled={daysHabit.includes(d.id) ? true : false}
